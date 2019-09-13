@@ -1,10 +1,10 @@
 import React from "react";
-import FilterMagic from "./Button";
+import "./TypeFilter.css";
 
 const TypeFilter = () => {
   return (
     <div>
-      <FilterMagic />
+      <button className="default br3 ma2 grow shadow-5">Magic</button>
     </div>
   );
 };
