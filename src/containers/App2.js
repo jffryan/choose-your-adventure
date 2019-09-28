@@ -1,15 +1,15 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
-// import TypeFilter from "../components/TypeFilter";
-import { characters } from "../components/Characters";
+import { characters, formatCharacter } from "../config/Characters";
 import "./App.css";
 
 class App2 extends Component {
   constructor() {
     super();
     this.state = {
-      characters: characters,
+      characters: characters.map(formatCharacter),
       searchfield: "",
       magicDisplayOnly: false
     };
@@ -25,24 +25,33 @@ class App2 extends Component {
   };
 
   render() {
-    const filteredCharacters = this.state.characters.filter(character => {
-      return character.name
-        .toLowerCase()
-        .includes(this.state.searchfield.toLowerCase());
-    });
-    const displayMagicCharacters = this.state.characters.filter(character => {
-      return character.magic === true;
-    });
+    const { magicDisplayOnly, characters, searchfield } = this.state;
+    const matchesName = character =>
+      character.name.toLowerCase().includes(searchfield.toLowerCase());
+    const isMagic = character => character.magic === true;
+    const filters = [matchesName];
+    if (magicDisplayOnly) filters.push(isMagic);
+    const filteredCharacters = characters.filter(char =>
+      filters.every(filter => filter(char))
+    );
+    const getButton = () => (
+      <button
+        className="default-button shadow-5"
+        id="magic-button"
+        onClick={this.toggleMagicType}
+      >
+        Magic
+      </button>
+    );
     return (
-      <div className="tc">
-        <h1 className="f1">Choose Your Character</h1>
-        <SearchBox searchChange={this.onSearchChange} />
-        {/* <TypeFilter onClick={this.toggleMagicType} /> */}
-        <button onClick={this.toggleMagicType}>Magic</button>
-        {!this.state.magicDisplayOnly && (
+      <Router>
+        <div className="tc">
+          <h1 className="f1">Choose Your Character</h1>
+          <SearchBox searchChange={this.onSearchChange} />
+          {getButton()}
           <CardList characters={filteredCharacters} />
-        )}
-      </div>
+        </div>
+      </Router>
     );
   }
 }

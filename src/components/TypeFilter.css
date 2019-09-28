@@ -1,4 +1,4 @@
-.default {
+.default-button {
   padding: 1rem 2rem;
   border-radius: 15px;
   border-style: none;
@@ -6,10 +6,6 @@
   font-size: 20px;
 }
 
-.default:hover {
+.default-button:hover {
   opacity: 0.85;
-}
-
-.test {
-  padding: 200px;
 }

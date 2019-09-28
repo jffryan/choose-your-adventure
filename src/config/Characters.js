@@ -1,9 +1,31 @@
+import stats from "./Stats";
+// hp, str, def, mag, spd
+export const formatCharacter = character => {
+  return {
+    ...character,
+    stats: !character.stats
+      ? {}
+      : Object.keys(character.stats).reduce((res, statName) => {
+          const statConfig = stats[statName];
+          res[statName] = { ...statConfig, ...character.stats[statName] };
+          return res;
+        }, {})
+  };
+};
+
 export const characters = [
   {
     id: 1,
     name: "Malakas",
     spec: "Cleric",
-    magic: true
+    magic: true,
+    stats: {
+      hp: { val: 10 },
+      str: { val: 5 },
+      def: { val: 3 },
+      mag: { val: 8 },
+      spd: { val: 4 }
+    }
   },
   {
     id: 2,
