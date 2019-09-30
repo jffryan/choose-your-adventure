@@ -28,3 +28,43 @@ h1 {
   font-weight: 600;
   color: #fff;
 }
+
+.start-game {
+  text-decoration: none;
+  border: 1px solid #333;
+  border-radius: 15px;
+  padding: 0.5em 1em;
+  background: #fff;
+}
+
+.start-game:hover,
+.start-game:focus {
+  background-color: #90278e;
+  color: #fff;
+  border: 1px solid #90278e;
+}
+
+.card-link {
+  color: #333;
+}
+
+.no-decoration {
+  text-decoration: none;
+  color: #0ccac4;
+}
+
+.character-name {
+  color: #333;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.col-1-2 {
+  flex: 1;
+}
+
+.spacing {
+  padding: 2em;
+}
