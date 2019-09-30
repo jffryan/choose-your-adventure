@@ -1,36 +1,21 @@
 import React, { Component } from "react";
-import CardList from "../components/CardList";
-import SearchBox from "../components/SearchBox";
-import TypeFilter from "../components/TypeFilter";
-import { characters } from "../components/Characters";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 
+import Home from "../pages/Home";
+import CharacterSelect from "../pages/CharacterSelect";
+import Footer from "../components/Footer";
+
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      characters: characters,
-      searchfield: ""
-    };
-  }
-
-  onSearchChange = event => {
-    this.setState({ searchfield: event.target.value });
-  };
-
   render() {
-    const filteredCharacters = this.state.characters.filter(character => {
-      return character.name
-        .toLowerCase()
-        .includes(this.state.searchfield.toLowerCase());
-    });
     return (
-      <div className="tc">
-        <h1 className="f1">Choose Your Character</h1>
-        <SearchBox searchChange={this.onSearchChange} />
-        <TypeFilter />
-        <CardList characters={filteredCharacters} />
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" render={() => <Home />} />
+          <Route path="/character-select" render={() => <CharacterSelect />} />
+        </Switch>
+        <Footer />
+      </BrowserRouter>
     );
   }
 }

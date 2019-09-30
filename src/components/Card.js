@@ -1,37 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Card = ({ character }) => {
-  const { name, spec, id, stats } = character;
+const Card = ({ character, onClick }) => {
+  const { name, spec, id, url } = character;
   return (
-    <div className="tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5">
-      <img
-        src={`https://robohash.org/${id}?200x200`}
-        alt={name}
-        title={name}
-      ></img>
-      <div>
-        <h2>{name}</h2>
-        <p style={{ fontSize: "18px" }}>{spec}</p>
+    <Link
+      className="card-link"
+      onClick={() => onClick(character)}
+      to={`/character-select/${url}`}
+    >
+      <div className="tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5">
+        <img src={`https://robohash.org/${id}?200x200`} alt={name}></img>
         <div>
-          {stats &&
-            Object.keys(stats).map(statName => {
-              const statConfig = stats[statName];
-              const { val, desc } = statConfig;
-              return <p key={statName} title={desc}>{`${statName}: ${val}`}</p>;
-            })}
+          <h2>{name}</h2>
+          <p style={{ fontSize: "18px" }}>{spec}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
 export default Card;
-
-/* <p>
-  {stats &&
-    Object.keys(stats).map(statName => {
-      const statConfig = stats[statName];
-      const { val, desc } = statConfig;
-      return <p title={desc}>{`${statName}: ${val}`}</p>;
-    })}
-</p> */

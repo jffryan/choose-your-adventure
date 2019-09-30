@@ -4,6 +4,15 @@ const stats = {
   },
   str: {
     desc: "Basic physical strength"
+  },
+  def: {
+    desc: "Mitigates incoming damage"
+  },
+  mag: {
+    desc: "Aptitude for magical arts"
+  },
+  spd: {
+    desc: "Dexterity and agility"
   }
 };
 
